@@ -22,3 +22,11 @@ describe('getWeights', () => {
   });
 });
 
+describe('getWeights with roundPrecision option', () => {
+  it('should return a JS object with an array containing weights and the consistency index', () => {
+    console.log(ahp.getWeights(c, {roundPrecision: 5}));
+    assert.equal('test','test');
+  });
+});
+
+

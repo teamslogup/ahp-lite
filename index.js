@@ -1,12 +1,17 @@
 const linearAlgebra = require('linear-algebra')();
-
 const Matrix = linearAlgebra.Matrix;
+const _ = require('lodash');
+
 
 const ri = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41];
 
-exports.getWeights = function getWeights(c) {
+exports.getWeights = function getWeights(c, options = {}) {
 // ERROR HANDLERS
-
+  let roundPrecision = 2;
+  const roundPrecisionOption = options.roundPrecision;
+  if (Number.isInteger(roundPrecisionOption)) {
+    roundPrecision = roundPrecisionOption;
+  }
   if (!(c.data)) {
     console.log('ERROR. Matrix argument MUST be a linear-algebra module matrix.');
     return 'ERROR';
@@ -122,11 +127,11 @@ exports.getWeights = function getWeights(c) {
   // Rounded values
   j = 0;
   for (j = 0; j < c.cols; j += 1) {
-    ev[j] = Math.round(ev[j] * 100) / 100;
+    ev[j] = _.round(ev[j], roundPrecision);
   }
 
-  ci = Math.round(ci * 100) / 100;
-  cr = Math.round(cr * 100) / 100;
+  ci = _.round(ci, roundPrecision);
+  cr = _.round(cr, roundPrecision);
 
   const resp = { ev, ci, cr };
 
